@@ -1,0 +1,122 @@
+algorithme pp
+début
+   saisir(n)
+   remplir_f(ft,n)
+   afficher(ft) 
+fin
+
+
+# TDNT
+┌─────────────────────────────────────────────────┐
+│                 Nouveaux Types                  │
+├─────────────────────────────────────────────────┤
+│ fiche_t = fichier texte                 │
+└─────────────────────────────────────────────────┘
+
+#TDO 
+
+┌─────────────────────────────┬───────────────────┐
+│            Objet            │   Nature / Type   │
+├─────────────────────────────┼───────────────────┤
+│ n                           │ entier            │
+├─────────────────────────────┼───────────────────┤
+│ ft                           │ fiche_t           │
+├─────────────────────────────┼───────────────────┤
+│ saisir, remplir_f, afficher │ procédure         │
+└─────────────────────────────┴───────────────────┘
+
+procédure saisir(@n:entier)
+début
+   
+    répéter
+        ecrire("Donner n")
+        lire(n)
+    jusqu'à  n>1 et n<11
+
+fin
+/*    ----------------------------------------------------   */
+
+procédure  remplir_f(@ft:fiche_t,n:entier)
+début
+    ouvrir("captcha.txt", ft, "w") 
+    pour i de 0 à n-1 faire
+        
+        //saisir une chaine captcha
+        ch<-- ""
+        pour j de 1 à 26 faire
+            ch<-- ch+ convch(aléa(0, 1) )
+        fin_pour
+        // ecrire la chaine dans le fichier texte
+        ecrire_nl(ft,ch)
+
+    fin_pour
+    fermer(ft)
+    
+fin
+//TDO 
+┌─────────────────────────────┬───────────────────┐
+│            Objet            │   Nature / Type   │
+├─────────────────────────────┼───────────────────┤
+│ i                           │ entier            │
+├─────────────────────────────┼───────────────────┤
+│ j                           │ entier            │
+├─────────────────────────────┼───────────────────┤
+│ ch                          │ chaine            │
+└─────────────────────────────┴───────────────────┘
+
+/*    ----------------------------------------------------   */
+
+procédure afficher(@f:fiche_t) 
+début
+ouvrir("captcha.txt", ft, "r") 
+tant que non fin_fichier(ft)  faire
+   
+    lire_ligne(ft, ch) 
+    cap<-- generer_captcha(ch)
+    ecrire(cap, "-")
+
+fin_tant_que
+
+fermer(ft) 
+fin
+
+//TDO  
+┌─────────────────────────────┬───────────────────┐
+│            Objet            │   Nature / Type   │
+├─────────────────────────────┼───────────────────┤
+│ generer_captcha             │ fonction          │
+└─────────────────────────────┴───────────────────┘
+
+
+
+fonction  generer_captcha(ch:chaine):chaine
+début
+   cap<--""
+   nbv<--0
+    pour i de 0 à long(ch)-1 faire
+        
+        si ch[i] ="1"  alors
+            c<-- chr(i+ ord("A"))
+            cap<--cap+ c
+            si c dans["A","E","I","O","U","Y"] alors
+               nbv<--nbv+1 
+            fin_si
+
+        fin_si
+        
+    fin_pour
+    cap<-- cap+ chr(nbv+70)
+    
+    retourner cap
+fin
+
+  
+   //TDO
+   ┌─────────────────────────────┬───────────────────┐
+   │            Objet            │   Nature / Type   │
+   ├─────────────────────────────┼───────────────────┤
+   │ i,nbv                       │ entier            │
+   ├─────────────────────────────┼───────────────────┤
+   │ ch,c, cap                   │ chaine            │
+   └─────────────────────────────┴───────────────────┘
+   
